@@ -1,104 +1,41 @@
-**README: YOLO Tracking System**
+YOLO + BOTSORT Object Tracking
+This project demonstrates how to perform object tracking using the YOLO (You Only Look Once) object detection model and the BOTSORT tracking algorithm. The YOLO model is used to detect objects in each frame of a video, and BOTSORT is used for tracking those objects across frames.
 
-**1. Overview**
+Features
+YOLO Detection: Detect objects in each video frame.
+BOTSORT Tracking: Track objects across frames using the BOTSORT algorithm.
+Real-time Display: Display the detected and tracked objects in real-time.
+Track Information: Show unique track IDs and bounding boxes for each tracked object.
+Requirements
+Python 3.7+
+OpenCV
+ultralytics (for YOLO)
+numpy
+BOTSORT (for tracking)
+You can install the required dependencies using the following commands:
 
-This project implements an object detection and tracking system using YOLO for object detection and BYTETracker for multi-object tracking. The script processes a given video file to detect objects in each frame and tracks their movements across frames.
-
-**2. Requirements**
-
-- Python 3.x
-- OpenCV
-- Ultralytics YOLO
-- NumPy
-
-You can install the required dependencies using the following command:
-
-```
 pip install opencv-python ultralytics numpy
-```
+To install BOTSORT, you'll need to clone the repository or install it manually (depending on its distribution method).
 
-**3. Running the Script**
+Usage
+Command Line Arguments
+--video : Path to the input video file.
+--model : Path to the YOLO model file (e.g., yolov8.pt).
+Example Command
+python track_objects.py --video path_to_video.mp4 --model path_to_yolo_model.pt
+This will load the specified YOLO model and the video file, then process the video with object detection and tracking.
 
-To run the tracking system, use the following parameters:
-
-- `video_path`: Path to the input video file. For example: `demo.mp4`
-- `model_path`: Path to the YOLO model weights file. For example: `best.pt`
-- `tracker_cfg`: Dictionary containing configuration parameters for BYTETracker.
-
-Example of running the tracking function:
-
-```python
-run_tracking(video_path, model_path, tracker_cfg)
-```
-
-**4. Configuration**
-
-You can customize BYTETracker by modifying `tracker_cfg` parameters:
-
-- `tracker_type`: The type of tracker used, set to `'bytetrack'`.
-- `track_high_thresh`: High confidence threshold for track initialization.
-- `track_low_thresh`: Low confidence threshold for potential tracks.
-- `new_track_thresh`: Threshold to initialize a new track.
-- `track_buffer`: The maximum number of frames a track can remain inactive.
-- `match_thresh`: Threshold for matching detections with existing tracks.
-- `fuse_score`: Boolean to enable score fusion.
-
-**5. Usage**
-
-- Once you run the script, it will open a window displaying the video with detected and tracked objects marked by rectangles and IDs.
-- You can exit the tracking by pressing the "q" key.
-
-**6. Notes**
-
-- Ensure the model weights (`best.pt`) are compatible with the YOLO version being used.
-- Adjust tracking parameters to suit your specific use case for optimal performance.
-
-**7. License**
-
-This project is provided under an MIT license. You can use, modify, and distribute it freely.
-
-**二语版本：YOLO 跑道系统**
-
-**1. 总览**
-
-本项目实现了一个使用 YOLO 进行目标检测和 BYTETracker 进行多目标追踪的物体检测和追踪系统。该脚本对一个指定视频文件进行处理，在每个帧检测目标并追踪它们在帧上的运动。
-
-**2. 软件环境要求**
-
-- Python 3.x
-- OpenCV
-- Ultralytics YOLO
-- NumPy
-
-可以使用以下命令安装必要的依赖：
-
-```
-pip install opencv-python ultralytics numpy
-```
-
-**3. 运行脚本**
-
-使用以下参数运行追踪系统：
-
-- `video_path`：输入视频文件的路径。例如：`demo.mp4`
-- `model_path`：YOLO 模型权重文件的路径。例如：`best.pt`
-- `tracker_cfg`：包含 BYTETracker 配置参数的字典。
-
-例如：
-
-```python
-run_tracking(video_path, model_path, tracker_cfg)
-```
-
-**4. 配置信息**
-
-可以通过修改 `tracker_cfg` 来自定义 BYTETracker ：
-
-- `tracker_type`：追踪器类型，设为 `'bytetrack'`。
-- `track_high_thresh`：追踪初始化的高信心闪值。
-- `track_low_thresh`：未来追踪的低信心闪值。
-- `new_track_thresh`：初始化新追踪的阀值。
-- `track_buffer`：追踪在最大正常效的帧数。
-- `match_thresh`：用于中本的追踪设置。
-- `fuse_score`：是否开启平安展示。
-
+File Structure
+track_objects.py: The main script for running object tracking.
+utils.py: Contains helper functions (if any).
+requirements.txt: A file listing the required Python packages.
+How It Works
+YOLO Model: The YOLO model is used to detect objects in each video frame. The detection results include bounding boxes with coordinates (x_min, y_min, x_max, y_max) and confidence scores.
+BOTSORT Tracker: The BOTSORT tracker receives the detection results and tracks the objects across frames. Each object gets a unique track ID.
+Drawing Bounding Boxes: For each tracked object, a bounding box is drawn on the video frame with the corresponding track ID displayed above it.
+Real-time Display: The processed frames are displayed in real-time using OpenCV's imshow function.
+Notes
+Performance: The tracking algorithm may require a high-performance machine for real-time video processing, especially if using large or high-resolution videos.
+Model File: Ensure that the YOLO model file is correctly trained and compatible with your use case. You can use pre-trained YOLOv8 models or fine-tune a model for your specific needs.
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
